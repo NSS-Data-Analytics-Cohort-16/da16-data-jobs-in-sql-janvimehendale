@@ -107,12 +107,9 @@ title NOT iLIKE '%Analytics%'
 -- **BONUS:**
 -- You want to understand which jobs requiring SQL are hard to fill. 
 -- Answer: Data Analyst for Consulting and Business Services is hard to fill.
-
-
 SELECT COUNT(title) AS No_of_jobs, domain 
 FROM data_analyst_jobs
-WHERE days_since_posting > 21
-AND skill = 'SQL'
+WHERE skill = 'SQL'
 GROUP BY domain
 ORDER BY No_of_jobs DESC;
 
