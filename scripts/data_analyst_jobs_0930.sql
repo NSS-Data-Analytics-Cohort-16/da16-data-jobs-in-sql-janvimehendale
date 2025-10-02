@@ -114,7 +114,7 @@ WHERE skill LIKE 'SQL'
 ORDER BY days_since_posting DESC;
 
 --Find the number of jobs by industry (domain) that require SQL and have been
---posted longer than 3 weeks. 
+-- posted longer than 3 weeks. 
 -- Disregard any postings where the domain is NULL. 
 -- Order your results so that the domain with the greatest
 --number of `hard to fill` jobs is at the top. 
