@@ -105,7 +105,29 @@ AND
 title NOT iLIKE '%Analytics%' 
 
 -- **BONUS:**
--- You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks. 
---  - Disregard any postings where the domain is NULL. 
---  - Order your results so that the domain with the greatest number of `hard to fill` jobs is at the top. 
---   - Which three industries are in the top 3 on this list? How many jobs have been listed for more than 3 weeks for each of the top 3?
+-- You want to understand which jobs requiring SQL are hard to fill. 
+-- Answer: Data Analyst for Consulting and Business Services is hard to fill.
+
+SELECT title, skill, days_since_posting, domain 
+FROM data_analyst_jobs
+WHERE skill LIKE 'SQL'
+ORDER BY days_since_posting DESC;
+
+--Find the number of jobs by industry (domain) that require SQL and have been
+--posted longer than 3 weeks. 
+-- Disregard any postings where the domain is NULL. 
+-- Order your results so that the domain with the greatest
+--number of `hard to fill` jobs is at the top. 
+-- Which three industries are in the top 3 on this list? 
+--How many jobs have been listed for more than 3 weeks for each of the top 3?
+--4	"Consulting and Business Services"
+--2	"Consumer Goods and Services"
+--1	"Real Estate"
+
+SELECT COUNT(title) AS No_of_jobs, domain, days_since_posting, skill 
+FROM data_analyst_jobs
+WHERE days_since_posting > 21
+AND skill = 'SQL'
+AND domain IS NOT NULL
+GROUP BY days_since_posting, domain,skill
+ORDER BY No_of_jobs DESC, days_since_posting DESC;
