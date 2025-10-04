@@ -41,23 +41,23 @@ WHERE review_count BETWEEN 500 AND 1000;
 
 -- 6.	Show the average star rating for companies in each state. 
 --The output should show the state as `state` and the average rating for the state as `avg_rating`. 
---Which state shows the highest average rating? NE = 4.199
+--Which state shows the highest average rating? NE = 4.20
 
 SELECT
 	location AS state,
-	AVG(star_rating) AS avg_rating	
+	ROUND(AVG(star_rating),2) AS avg_rating	
 FROM data_analyst_jobs
 WHERE star_rating IS NOT NULL
 GROUP BY location
 ORDER BY avg_rating DESC;
 
 -- 7.	Select unique job titles from the data_analyst_jobs table. How many are there? 881
-SELECT DISTINCT(title)
+SELECT COUNT(DISTINCT(title))
 FROM data_analyst_jobs;
 
 -- 8.	How many unique job titles are there for California companies? 230
 SELECT 
-	DISTINCT(title)
+	COUNT(DISTINCT(title))
 FROM data_analyst_jobs
 WHERE location = 'CA';
 
@@ -124,10 +124,12 @@ ORDER BY No_of_jobs DESC;
 --2	"Consumer Goods and Services"
 --1	"Real Estate"
 
-SELECT COUNT(title) AS No_of_jobs, domain 
+SELECT 
+	COUNT(title) AS No_of_jobs,
+	domain 
 FROM data_analyst_jobs
 WHERE days_since_posting > 21
-AND skill = 'SQL'
-AND domain IS NOT NULL
+	AND skill ILIKE '%SQL%'
+	AND domain IS NOT NULL
 GROUP BY domain
 ORDER BY No_of_jobs DESC;
